@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const floatingContainer = document.getElementById("floating-container");
   const progressFill = document.querySelector(".progress-fill");
 
-  let explosionTimer = null;
   let isMusicPlaying = false;
   let synthInterval = null;
   let audioCtx = null;
@@ -72,15 +71,9 @@ document.addEventListener("DOMContentLoaded", () => {
     playMusic();
     switchScreen(screenBouquet, screenExplosion);
     startFloatingEffect();
-
-    if (explosionTimer) clearTimeout(explosionTimer);
-    explosionTimer = setTimeout(() => {
-      switchScreen(screenExplosion, screenEnvelope);
-    }, 9000);
   });
 
   skipToLetterBtn?.addEventListener("click", () => {
-    if (explosionTimer) clearTimeout(explosionTimer);
     switchScreen(screenExplosion, screenEnvelope);
   });
 

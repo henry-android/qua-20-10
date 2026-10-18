@@ -1,7 +1,11 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import confetti from 'canvas-confetti';
-import { Sparkles, ArrowRight, Heart } from 'lucide-react';
-import { generateFloatingParticles, FloatingParticle, DEFAULT_PHOTOS } from '../utils/cardUtils';
+import React, { useEffect, useMemo } from "react";
+import confetti from "canvas-confetti";
+import { Sparkles, ArrowRight } from "lucide-react";
+import {
+  generateFloatingParticles,
+  FloatingParticle,
+  DEFAULT_PHOTOS,
+} from "../utils/cardUtils";
 
 interface ExplosionScreenProps {
   onFinishExplosion: () => void;
@@ -12,13 +16,11 @@ interface ExplosionScreenProps {
 export const ExplosionScreen: React.FC<ExplosionScreenProps> = ({
   onFinishExplosion,
   photos = DEFAULT_PHOTOS,
-  recipientName = "Hồng Nhung"
+  recipientName = "Hồng Nhung",
 }) => {
-  const [secondsLeft, setSecondsLeft] = useState(9);
-
   // Generate particles based on passed photos
   const particles: FloatingParticle[] = useMemo(() => {
-    const urls = photos.map(p => p.url);
+    const urls = photos.map((p) => p.url);
     return generateFloatingParticles(32, urls);
   }, [photos]);
 
@@ -29,7 +31,7 @@ export const ExplosionScreen: React.FC<ExplosionScreenProps> = ({
       particleCount: 80,
       spread: 70,
       origin: { y: 0.65 },
-      colors: ['#ff4d6d', '#ff758f', '#ffccd5', '#ffd166', '#c9184a']
+      colors: ["#ff4d6d", "#ff758f", "#ffccd5", "#ffd166", "#c9184a"],
     });
 
     // Secondary heart-like bursts
@@ -39,7 +41,7 @@ export const ExplosionScreen: React.FC<ExplosionScreenProps> = ({
         angle: 60,
         spread: 55,
         origin: { x: 0.1, y: 0.7 },
-        colors: ['#e63946', '#ffb703', '#ff758f']
+        colors: ["#e63946", "#ffb703", "#ff758f"],
       });
     }, 1200);
 
@@ -49,7 +51,7 @@ export const ExplosionScreen: React.FC<ExplosionScreenProps> = ({
         angle: 120,
         spread: 55,
         origin: { x: 0.9, y: 0.7 },
-        colors: ['#ff4d6d', '#ffd166', '#fff']
+        colors: ["#ff4d6d", "#ffd166", "#fff"],
       });
     }, 2400);
 
@@ -59,37 +61,24 @@ export const ExplosionScreen: React.FC<ExplosionScreenProps> = ({
     };
   }, []);
 
-  // Countdown timer for 9 seconds auto-transition to Screen 4
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSecondsLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(interval);
-          onFinishExplosion();
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [onFinishExplosion]);
-
   return (
     <div className="relative w-full h-full overflow-hidden select-none bg-gradient-to-b from-[#250718] via-[#15030f] to-[#090107]">
       {/* Dynamic Floating Container */}
-      <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden" data-testid="floating-elements-layer">
+      <div
+        className="absolute inset-0 pointer-events-none z-10 overflow-hidden"
+        data-testid="floating-elements-layer"
+      >
         {particles.map((p) => {
           const style = {
             left: `${p.leftPercent}%`,
             animationDuration: `${p.durationSec}s`,
             animationDelay: `${p.delaySec}s`,
             transform: `scale(${p.scale})`,
-            ['--drift-x' as string]: `${p.swayDistancePx}px`,
-            ['--rot-deg' as string]: `${p.rotationDeg}deg`
+            ["--drift-x" as string]: `${p.swayDistancePx}px`,
+            ["--rot-deg" as string]: `${p.rotationDeg}deg`,
           } as React.CSSProperties;
 
-          if (p.type === 'photo' && p.photoUrl) {
+          if (p.type === "photo" && p.photoUrl) {
             return (
               <div
                 key={p.id}
@@ -102,7 +91,8 @@ export const ExplosionScreen: React.FC<ExplosionScreenProps> = ({
                     alt={recipientName}
                     className="w-full h-20 sm:h-24 object-cover rounded"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80';
+                      (e.target as HTMLImageElement).src =
+                        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80";
                     }}
                   />
                   <span className="text-[10px] text-rose-900 font-semibold mt-1 tracking-tight truncate max-w-[85px]">
@@ -113,7 +103,7 @@ export const ExplosionScreen: React.FC<ExplosionScreenProps> = ({
             );
           }
 
-          if (p.type === 'text') {
+          if (p.type === "text") {
             return (
               <div
                 key={p.id}
@@ -166,12 +156,6 @@ export const ExplosionScreen: React.FC<ExplosionScreenProps> = ({
             <span>Mở bức thư ngay</span>
             <ArrowRight className="w-4 h-4" />
           </button>
-        </div>
-
-        {/* Countdown Pill */}
-        <div className="mt-3 text-[11px] text-rose-300/70 flex items-center gap-1">
-          <Heart className="w-3 h-3 text-rose-400 fill-rose-400" />
-          <span>Tự động chuyển sang phong bì thư trong ({secondsLeft}s)</span>
         </div>
       </div>
     </div>

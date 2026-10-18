@@ -1,4 +1,4 @@
-import JSZip from 'jszip';
+import JSZip from "jszip";
 
 export interface CodeTemplates {
   html: string;
@@ -7,7 +7,9 @@ export interface CodeTemplates {
   guide: string;
 }
 
-export function getCodeTemplates(recipientName: string = "Hồng Nhung"): CodeTemplates {
+export function getCodeTemplates(
+  recipientName: string = "Hồng Nhung",
+): CodeTemplates {
   const html = `<!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -670,7 +672,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const floatingContainer = document.getElementById('floating-container');
   const progressFill = document.querySelector('.progress-fill');
 
-  let explosionTimer = null;
   let isMusicPlaying = false;
 
   // Danh sách hình ảnh của Hồng Nhung (Lấy từ assets/images/)
@@ -726,16 +727,10 @@ document.addEventListener('DOMContentLoaded', () => {
     switchScreen(screenBouquet, screenExplosion);
     startFloatingEffect();
 
-    // Tự động chuyển sang Màn hình 4 (Phong bì) sau 9 giây
-    if (explosionTimer) clearTimeout(explosionTimer);
-    explosionTimer = setTimeout(() => {
-      switchScreen(screenExplosion, screenEnvelope);
-    }, 9000);
   });
 
   // Bỏ qua hiệu ứng để vào thư ngay
   skipToLetterBtn?.addEventListener('click', () => {
-    if (explosionTimer) clearTimeout(explosionTimer);
     switchScreen(screenExplosion, screenEnvelope);
   });
 
@@ -879,7 +874,9 @@ Chỉ cần thực hiện 4 bước đơn giản dưới đây để có link we
 /**
  * Creates a downloadable zip file of the qua-20-10 package
  */
-export async function generateQua2010Zip(recipientName: string = "Hồng Nhung"): Promise<Blob> {
+export async function generateQua2010Zip(
+  recipientName: string = "Hồng Nhung",
+): Promise<Blob> {
   const zip = new JSZip();
   const templates = getCodeTemplates(recipientName);
 
@@ -887,7 +884,7 @@ export async function generateQua2010Zip(recipientName: string = "Hồng Nhung")
   if (!rootFolder) throw new Error("Could not create zip folder");
 
   rootFolder.file("index.html", templates.html);
-  
+
   const cssFolder = rootFolder.folder("css");
   cssFolder?.file("style.css", templates.css);
 
@@ -899,19 +896,19 @@ export async function generateQua2010Zip(recipientName: string = "Hồng Nhung")
   imgFolder?.file(
     "README_HINH_ANH.txt",
     `HƯỚNG DẪN ĐẶT ẢNH CỦA ${recipientName.toUpperCase()}:\n\n` +
-    "1. Đặt ảnh chân dung đẹp nhất vào đây với tên: hong-nhung-portrait.jpg\n" +
-    "2. Đặt các ảnh kỷ niệm khác với tên: hong-nhung-1.jpg, hong-nhung-2.jpg, hong-nhung-3.jpg\n" +
-    "3. Đặt ảnh bó hoa hồng với tên: bouquet.png\n\n" +
-    "Lưu ý: Nếu chưa có ảnh, trang web đã có sẵn hình ảnh mẫu tuyệt đẹp!"
+      "1. Đặt ảnh chân dung đẹp nhất vào đây với tên: hong-nhung-portrait.jpg\n" +
+      "2. Đặt các ảnh kỷ niệm khác với tên: hong-nhung-1.jpg, hong-nhung-2.jpg, hong-nhung-3.jpg\n" +
+      "3. Đặt ảnh bó hoa hồng với tên: bouquet.png\n\n" +
+      "Lưu ý: Nếu chưa có ảnh, trang web đã có sẵn hình ảnh mẫu tuyệt đẹp!",
   );
 
   const audioFolder = assetsFolder?.folder("audio");
   audioFolder?.file(
     "README_AM_THANH.txt",
     "HƯỚNG DẪN ĐẶT NHẠC NỀN:\n\n" +
-    "1. Đặt file nhạc lãng mạn yêu thích vào đây.\n" +
-    "2. Đổi tên file thành: background-music.mp3\n" +
-    "3. Web sẽ tự động kích hoạt phát bài này khi em yêu chạm vào bó hoa!"
+      "1. Đặt file nhạc lãng mạn yêu thích vào đây.\n" +
+      "2. Đổi tên file thành: background-music.mp3\n" +
+      "3. Web sẽ tự động kích hoạt phát bài này khi em yêu chạm vào bó hoa!",
   );
 
   rootFolder.file("HUONG_DAN_DEPLOY_GITHUB_PAGES.md", templates.guide);
