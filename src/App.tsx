@@ -74,7 +74,7 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen min-h-[100dvh] w-full bg-slate-950 text-slate-100 flex flex-col font-sans overflow-x-hidden">
+    <div className="relative flex h-[100dvh] min-h-screen w-full flex-col overflow-x-hidden bg-slate-950 font-sans text-slate-100">
       {/* Editor controls are hidden from the recipient by default. */}
       {isEditorMode && (
         <header className="relative z-30 w-full px-4 py-2.5 bg-slate-900/90 backdrop-blur-md border-b border-rose-950/60 flex items-center justify-between gap-2 text-xs">
@@ -157,8 +157,8 @@ export default function App() {
       )}
 
       {/* Main Experience Container */}
-      <main className="relative flex-1 w-full flex items-center justify-center overflow-hidden">
-        {isPhoneFrame ? (
+      <main className="relative flex min-h-0 flex-1 w-full items-center justify-center overflow-hidden">
+        {isEditorMode && isPhoneFrame ? (
           /* Phone Frame Simulator (Looks just like Messenger Webview on iPhone/Android) */
           <div className="w-[380px] h-[720px] max-h-[88vh] rounded-[42px] border-[10px] border-slate-800 bg-slate-950 shadow-[0_25px_70px_rgba(0,0,0,0.8)] relative flex flex-col overflow-hidden ring-1 ring-white/10 my-auto">
             {/* Phone Notch / Dynamic Island */}
@@ -237,7 +237,7 @@ export default function App() {
           </div>
         ) : (
           /* Fullscreen Mobile-First Responsive View */
-          <div className="relative w-full h-full flex-1 flex flex-col items-center justify-center overflow-hidden">
+          <div className="relative flex h-full min-h-0 w-full flex-1 flex-col items-center justify-center overflow-hidden">
             {currentStep === 1 && (
               <GiftBoxScreen
                 onOpen={handleGiftBoxOpened}
