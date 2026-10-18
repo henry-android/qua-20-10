@@ -68,9 +68,12 @@ export const ExplosionScreen: React.FC<ExplosionScreenProps> = ({
         className="absolute inset-0 pointer-events-none z-10 overflow-hidden"
         data-testid="floating-elements-layer"
       >
-        {particles.map((p) => {
+        {particles.map((p, index) => {
+          const isPhoto = p.type === "photo" && p.photoUrl;
           const style = {
-            left: `${p.leftPercent}%`,
+            left: isPhoto
+              ? `${index % 2 === 0 ? 4 + (index % 3) * 3 : 66 + (index % 3) * 3}%`
+              : `${p.leftPercent}%`,
             animationDuration: `${p.durationSec}s`,
             animationDelay: `${p.delaySec}s`,
             transform: `scale(${p.scale})`,
@@ -78,7 +81,7 @@ export const ExplosionScreen: React.FC<ExplosionScreenProps> = ({
             ["--rot-deg" as string]: `${p.rotationDeg}deg`,
           } as React.CSSProperties;
 
-          if (p.type === "photo" && p.photoUrl) {
+          if (isPhoto) {
             return (
               <div
                 key={p.id}
