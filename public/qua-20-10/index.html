@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Món Quà 20/10 Dành Cho Hồng Nhung ❤️</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Màn hình 1: Loading / Mở quà -->
+  <section id="screen-loading" class="screen active">
+    <div class="stars-bg"></div>
+    <div class="gift-box-wrapper" id="gift-box-btn">
+      <div class="gift-box">
+        <div class="gift-lid"></div>
+        <div class="gift-body"></div>
+        <div class="gift-ribbon"></div>
+      </div>
+      <p class="loading-text">Đang mở món quà... Bạn chờ một chút nhé.</p>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Màn hình 2: Bó hoa hồng lớn -->
+  <section id="screen-bouquet" class="screen">
+    <div class="bouquet-container" id="bouquet-trigger">
+      <div class="bouquet-glow"></div>
+      <div class="bouquet-art">
+        <img src="assets/images/bouquet.png" alt="Bó hoa tặng em" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=600&q=80';" class="bouquet-img">
+      </div>
+      <div class="touch-hint">
+        <span class="sparkle-icon">✨</span>
+        <span>Chạm vào bó hoa để mở điều bất ngờ nhé em yêu ❤️</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Màn hình 3: Hiệu ứng bùng nổ (Bay lơ lửng) -->
+  <section id="screen-explosion" class="screen">
+    <div id="floating-container"></div>
+    <div class="explosion-header">
+      <h2 class="glowing-title">Chúc Mừng Ngày 20/10 Em Yêu ❤️</h2>
+      <p class="glowing-sub">Hồng Nhung - Cô gái xinh đẹp và tuyệt vời nhất!</p>
+      <button id="skip-to-letter-btn" class="skip-btn">Xem thư ngay &rarr;</button>
+    </div>
+  </section>
+
+  <!-- Màn hình 4: Chiếc phong bì hồng -->
+  <section id="screen-envelope" class="screen">
+    <div class="envelope-wrapper" id="envelope-trigger">
+      <div class="envelope">
+        <div class="wax-seal">
+          <span>❤️</span>
+          <small>20/10</small>
+        </div>
+      </div>
+      <p class="envelope-hint">💌 Chạm vào phong bì để mở bức thư tình yêu nhé!</p>
+    </div>
+  </section>
+
+  <!-- Màn hình 5: Mở thư và đọc lời nhắn -->
+  <section id="screen-letter" class="screen">
+    <div class="letter-modal">
+      <div class="letter-paper">
+        <div class="floral-corner top-left">🌸</div>
+        <div class="floral-corner top-right">🌸</div>
+        <div class="floral-corner bottom-left">🌸</div>
+        <div class="floral-corner bottom-right">🌸</div>
+
+        <div class="letter-content">
+          <h1 class="letter-heading">Gửi cô gái bé nhỏ của anh - Hồng Nhung...</h1>
+          <p class="letter-body">Nhân ngày Phụ nữ Việt Nam 20/10, anh muốn gửi trọn những tình cảm chân thành và ngọt ngào nhất tới em yêu của anh.</p>
+          <p class="letter-body">Cảm ơn em đã xuất hiện trong cuộc đời anh, mang đến cho anh những nụ cười rạng rỡ và sự ấm áp vô bờ bến. Ở bên em, mỗi ngày trôi qua với anh đều là một ngày đặc biệt và ngập tràn hạnh phúc.</p>
+          <p class="letter-body">Chúc Hồng Nhung của anh mãi luôn xinh đẹp, tự tin, rạng rỡ và tràn đầy niềm vui. Dù ngoài kia có bao nhiêu giông bão, anh vẫn sẽ luôn ở đây, nắm chặt tay em và che chở cho em.</p>
+          <p class="letter-body">Chúc em yêu một ngày 20/10 thật tuyệt vời và đáng nhớ!</p>
+          
+          <div class="letter-signature">
+            <p>Yêu em thật nhiều,</p>
+            <p class="sign-name">Người thương của em ❤️</p>
+          </div>
+        </div>
+
+        <div class="portrait-container">
+          <div class="portrait-frame">
+            <img src="assets/images/hong-nhung-portrait.jpg" alt="Hồng Nhung" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80';" class="portrait-img">
+          </div>
+          <span class="portrait-caption">Em luôn là bông hoa đẹp nhất trong tim anh 🌹</span>
+        </div>
+
+        <div class="letter-actions">
+          <button id="replay-btn" class="action-btn">❤️ Xem lại từ đầu</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nút bật/tắt nhạc nổi -->
+  <button id="music-toggle-btn" class="music-floating-btn" aria-label="Bật/Tắt nhạc">
+    <span id="music-icon">🎵</span>
+  </button>
+
+  <!-- Thẻ phát âm thanh nền -->
+  <audio id="bg-music" src="assets/audio/background-music.mp3" preload="auto" loop></audio>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

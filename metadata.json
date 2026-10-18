@@ -1,0 +1,7 @@
+{
+  "name": "Quà 20/10 Dành Tặng Hồng Nhung",
+  "description": "Trang web thiệp chúc mừng 20/10 lãng mạn dành riêng cho Hồng Nhung với hiệu ứng hoa hồng nở, pháo hoa trái tim, ảnh kỷ niệm bay lơ lửng và phong thư tình yêu.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
